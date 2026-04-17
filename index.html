@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense & Budget Visualizer</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header & Balance -->
+    <header>
+      <h1>💰 Budget Visualizer</h1>
+      <div class="balance-card">
+        <span class="balance-label">Total Balance</span>
+        <span class="balance-amount" id="totalBalance">Rp 0</span>
+      </div>
+    </header>
+
+    <!-- Input Form -->
+    <section class="form-section">
+      <h2>Add Transaction</h2>
+      <form id="transactionForm">
+        <div class="form-group">
+          <label for="itemName">Item Name</label>
+          <input type="text" id="itemName" placeholder="e.g. Lunch, Grab, etc." />
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount (Rp)</label>
+          <input type="number" id="amount" placeholder="e.g. 25000" min="1" />
+        </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category">
+            <option value="">-- Select Category --</option>
+            <option value="Food">🍔 Food</option>
+            <option value="Transport">🚗 Transport</option>
+            <option value="Fun">🎮 Fun</option>
+            <option value="Custom" id="customOption" style="display:none;">✏️ Custom</option>
+          </select>
+        </div>
+        <div class="form-group" id="customCategoryGroup" style="display:none;">
+          <label for="customCategory">Custom Category Name</label>
+          <input type="text" id="customCategory" placeholder="Enter category name" />
+        </div>
+        <div class="form-group">
+          <label for="spendingLimit">Spending Limit (Rp) <span class="optional">optional</span></label>
+          <input type="number" id="spendingLimit" placeholder="e.g. 100000" min="0" />
+        </div>
+        <p class="error-msg" id="errorMsg"></p>
+        <button type="submit" class="btn-add">+ Add Transaction</button>
+      </form>
+    </section>
+
+    <!-- Chart -->
+    <section class="chart-section">
+      <h2>Spending by Category</h2>
+      <div class="chart-wrapper">
+        <canvas id="spendingChart"></canvas>
+        <p class="no-data" id="noChartData">No data yet. Add a transaction!</p>
+      </div>
+    </section>
+
+    <!-- Transaction List -->
+    <section class="list-section">
+      <div class="list-header">
+        <h2>Transactions</h2>
+        <div class="sort-controls">
+          <label for="sortBy">Sort by:</label>
+          <select id="sortBy">
+            <option value="date">Date</option>
+            <option value="amount-asc">Amount ↑</option>
+            <option value="amount-desc">Amount ↓</option>
+            <option value="category">Category</option>
+          </select>
+        </div>
+      </div>
+      <ul class="transaction-list" id="transactionList">
+        <li class="empty-state" id="emptyState">No transactions yet.</li>
+      </ul>
+    </section>
+
+  </div>
+
+  <!-- Dark/Light Mode Toggle -->
+  <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">🌙</button>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
